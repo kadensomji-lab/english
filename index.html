@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Climb to Safety</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Lora for article text, Inter for clean headings and buttons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, nav, button, label, .ui-font {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    /* Simple CSS falling rain streaks for the hero section */
+    .rain-container {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .raindrop {
+      position: absolute;
+      top: -40px;
+      width: 2px;
+      height: 28px;
+      background: linear-gradient(to bottom, transparent, rgba(147, 197, 253, 0.45));
+      border-radius: 999px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh);
+      }
+    }
+
+    /* Simple fade-in animation as you scroll down */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Clean drop cap on first paragraph of each section */
+    .drop-cap::first-letter {
+      float: left;
+      font-size: 3.4rem;
+      line-height: 0.85;
+      padding-right: 0.65rem;
+      padding-top: 0.15rem;
+      font-weight: 700;
+      color: #facc15;
+    }
+
+    /* Simple custom range slider */
+    input[type="range"] {
+      accent-color: #38bdf8;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- =====================================================================
+       STICKY TOP PROGRESS BAR & CHAPTER LINKS
+  ====================================================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur border-b border-slate-800">
+    <!-- Thin reading progress bar -->
+    <div class="w-full h-1 bg-slate-900">
+      <div id="progress-bar" class="h-full bg-yellow-400 w-0 transition-all duration-100"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 h-12 flex items-center justify-between gap-4">
+      <a href="#top" class="ui-font font-bold text-sm text-white hover:text-yellow-400 transition">
+        Climb to Safety
+      </a>
+
+      <nav aria-label="Story sections" class="flex items-center gap-3 sm:gap-5 text-xs text-slate-400 overflow-x-auto">
+        <a href="#part-1" class="hover:text-white transition whitespace-nowrap">I. Radio Call</a>
+        <a href="#part-2" class="hover:text-white transition whitespace-nowrap">II. Canyon</a>
+        <a href="#part-3" class="hover:text-white transition whitespace-nowrap">III. Night</a>
+        <a href="#part-4" class="hover:text-white transition whitespace-nowrap">IV. Ledge</a>
+        <a href="#part-5" class="hover:text-white transition whitespace-nowrap">V. Morning After</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       HERO BANNER WITH SIMPLE CSS RAIN STREAKS
+  ====================================================================== -->
+  <section id="top" class="relative min-h-screen flex flex-col justify-between items-center text-center px-5 pt-24 pb-10 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 border-b border-slate-800">
+    <!-- Simple CSS Rain Layer -->
+    <div id="rain-layer" class="rain-container" aria-hidden="true"></div>
+
+    <!-- Simple Mountain Silhouette at Bottom of Hero -->
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="none" class="absolute bottom-0 left-0 w-full h-36 sm:h-48 pointer-events-none opacity-40">
+      <polygon points="0,220 0,90 220,170 480,60 720,165 980,75 1200,150 1200,220" fill="#020617" />
+    </svg>
+
+    <div class="relative z-10 mt-6">
+      <span class="ui-font inline-block px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-slate-800/90 text-sky-300 border border-slate-700">
+        July 31, 1976 — 50 Years Later
+      </span>
+    </div>
+
+    <div class="relative z-10 max-w-2xl mx-auto my-auto py-10">
+      <p class="ui-font text-xs uppercase tracking-widest text-slate-400 mb-3">
+        November 24, 2026
+      </p>
+      <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight text-white mb-6">
+        Climb to Safety
+      </h1>
+      <div class="w-16 h-1 bg-yellow-400 mx-auto mb-6 rounded-full"></div>
+      <p class="text-lg sm:text-2xl text-slate-200 leading-relaxed">
+        Fifty years ago, a storm that refused to move turned a Colorado canyon into a raging river in less than four hours. What separated the people who survived from the ones who did not came down to one simple choice.
+      </p>
+    </div>
+
+    <div class="relative z-10">
+      <a href="#part-1" class="ui-font inline-flex flex-col items-center gap-1.5 text-xs uppercase tracking-widest text-slate-400 hover:text-yellow-400 transition">
+        <span>Scroll to read</span>
+        <span class="text-yellow-400 text-base animate-bounce">↓</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       MAIN ARTICLE CONTENT
+  ====================================================================== -->
+  <main class="max-w-3xl mx-auto px-5 sm:px-8 py-16 space-y-20">
+
+    <!-- ===================================================================
+         SECTION I: THE RADIO CALL
+    ==================================================================== -->
+    <section id="part-1" class="fade-section space-y-6">
+      <div>
+        <p class="ui-font text-xs font-bold uppercase tracking-widest text-yellow-400">Part I</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">The Radio Call</h2>
+      </div>
+
+      <!-- Simple Dispatch Radio Card -->
+      <div class="rounded-2xl bg-slate-950 border border-slate-800 p-5 sm:p-6 shadow-lg">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+            <span class="ui-font text-xs font-bold uppercase tracking-wider text-red-400">Transmission · 9:15 PM</span>
+          </div>
+          <span class="ui-font text-xs text-slate-400">
+            UNIT: Sgt. W.H. Purdy | LOC: U.S. Hwy 34, 0.5 mi E of Drake
+          </span>
+        </div>
+        <blockquote class="text-xl sm:text-2xl font-semibold text-yellow-300 leading-snug">
+          "I'm stuck. I'm right in the middle of it. I can't get out."
+        </blockquote>
+      </div>
+
+      <div class="text-lg leading-relaxed text-slate-200 space-y-5">
+        <p class="drop-cap">
+          "I'm stuck. I'm right in the middle of it. I can't get out."
+        </p>
+        <p>
+          Those were the last words anyone heard from Sgt. Willis Hugh Purdy. It was around 9:15 p.m. on July 31, 1976. He was on U.S. Highway 34, half a mile east of Drake, Colorado, and the Big Thompson River was rising fast around his patrol car. He gave dispatch his location, and then he asked for one more thing. He told them to get the cars out of the low area below him.
+        </p>
+        <p>
+          Purdy had already finished his shift for the day. When dispatchers told him the weather in the canyon was turning dangerous, he drove in anyway and spent his last hours warning dozens of people to get out. His order to clear the lower canyon is credited with saving hundreds of lives. He was never heard from again.
+        </p>
+        <p>
+          He was one of 144 people who died that night in what is still Colorado's deadliest natural disaster. Five people were never found. Researchers later found that surviving came down to one basic move. People had to get out of the water's path and go uphill. Lori Peek, director of the Natural Hazards Center at the University of Colorado Boulder, says the people in the highest danger were those who stayed in their vehicles. This story is about that choice, and why it was so hard to make.
+        </p>
+      </div>
+    </section>
+
+    <hr class="border-slate-800" />
+
+    <!-- ===================================================================
+         SECTION II: THE CANYON
+    ==================================================================== -->
+    <section id="part-2" class="fade-section space-y-6">
+      <div>
+        <p class="ui-font text-xs font-bold uppercase tracking-widest text-yellow-400">Part II</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">The Canyon</h2>
+      </div>
+
+      <div class="text-lg leading-relaxed text-slate-200 space-y-5">
+        <p class="drop-cap">
+          July 31 was the night before Colorado's 100th birthday, and thousands of people had come to Big Thompson Canyon for the centennial weekend. Estimates of how many were inside that night range from 2,500 to 3,500. The canyon runs about 25 miles from Estes Park to Loveland between steep rock walls, with Highway 34 beside the river. According to Denver Gazette archives, the river was usually only about 18 inches deep.
+        </p>
+        <p>
+          Above them, a massive storm stalled against the mountains. NOAA scientists later found that strong easterly winds pushed warm, moist air up the slope, and the storm stopped moving. Up to 7.5 inches of rain fell in about an hour, and about 12 inches fell in a few hours, according to the U.S. Geological Survey. The steep slopes could not hold it. "It was almost like a bathtub effect," said Neil Grigg, an engineering professor at Colorado State University.
+        </p>
+      </div>
+
+      <!-- Simple Interactive Rain Gauge Graphic -->
+      <div class="rounded-2xl bg-slate-950 border border-slate-800 p-5 sm:p-6 shadow-lg">
+        <h3 class="text-base sm:text-lg font-bold text-white mb-4">Compare the Rainfall</h3>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+          <button type="button" data-rain="normal" class="rain-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+            Normal Shower: 0.2 in
+          </button>
+          <button type="button" data-rain="peak" class="rain-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">
+            1-Hour Peak: 7.5 in
+          </button>
+          <button type="button" data-rain="total" class="rain-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-sky-500 text-slate-950 transition">
+            Total Storm: 12.0 in
+          </button>
+        </div>
+
+        <!-- Horizontal Water Fill Bar -->
+        <div class="w-full h-8 bg-slate-900 rounded-xl overflow-hidden border border-slate-800 p-1">
+          <div id="rain-bar" class="h-full bg-gradient-to-r from-sky-500 to-blue-400 rounded-lg transition-all duration-500" style="width: 100%;"></div>
+        </div>
+
+        <div class="flex justify-between ui-font text-xs text-slate-500 mt-1.5 mb-3">
+          <span>0 in</span>
+          <span>6 in</span>
+          <span>12 in</span>
+        </div>
+
+        <p id="rain-caption" class="text-sm sm:text-base text-slate-300">
+          About 12 inches of rain fell in just a few hours. Steep canyon walls funneled all that water straight into the river like a bathtub.
+        </p>
+      </div>
+    </section>
+
+    <hr class="border-slate-800" />
+
+    <!-- ===================================================================
+         SECTION III: THE NIGHT
+    ==================================================================== -->
+    <section id="part-3" class="fade-section space-y-6">
+      <div>
+        <p class="ui-font text-xs font-bold uppercase tracking-widest text-yellow-400">Part III</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">The Night</h2>
+      </div>
+
+      <!-- Simple Interactive Timeline & Canyon Line Map -->
+      <div class="rounded-2xl bg-slate-950 border border-slate-800 p-5 sm:p-6 shadow-lg space-y-5">
+        <div class="flex items-center justify-between">
+          <h3 class="text-base sm:text-lg font-bold text-white">Timeline Along the 25-Mile Canyon</h3>
+          <span id="map-time-badge" class="ui-font px-2.5 py-1 rounded-lg bg-yellow-400 text-slate-950 text-xs font-bold">
+            5:00 PM
+          </span>
+        </div>
+
+        <!-- Clickable Time Tabs -->
+        <div id="timeline-tabs" class="flex flex-wrap gap-1.5">
+          <!-- Buttons added by JS -->
+        </div>
+
+        <!-- Simple SVG Line Map (Estes Park -> Waltonia -> Drake -> Loveland) -->
+        <div class="bg-slate-900 rounded-xl p-4 border border-slate-800">
+          <svg viewBox="0 0 600 120" class="w-full h-auto">
+            <!-- Canyon River / Highway 34 Line -->
+            <path d="M 55 55 Q 190 35, 290 60 T 545 60" fill="none" stroke="#334155" stroke-width="6" stroke-linecap="round" />
+            <path id="map-flood-line" d="M 55 55 Q 190 35, 290 60 T 545 60" fill="none" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" stroke-dasharray="500" stroke-dashoffset="420" class="transition-all duration-500" />
+
+            <!-- Location Dots -->
+            <circle cx="55" cy="55" r="7" fill="#0f172a" stroke="#94a3b8" stroke-width="2.5" />
+            <text x="55" y="34" text-anchor="middle" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="11" font-weight="600">Estes Park</text>
+            <text x="55" y="82" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="10">Mile 0</text>
+
+            <circle cx="225" cy="49" r="7" fill="#0f172a" stroke="#94a3b8" stroke-width="2.5" />
+            <text x="225" y="28" text-anchor="middle" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="11" font-weight="600">Waltonia</text>
+
+            <circle cx="385" cy="64" r="8" fill="#0f172a" stroke="#facc15" stroke-width="3" />
+            <text x="385" y="42" text-anchor="middle" fill="#facc15" font-family="Inter, sans-serif" font-size="12" font-weight="700">Drake</text>
+
+            <circle cx="545" cy="60" r="7" fill="#0f172a" stroke="#94a3b8" stroke-width="2.5" />
+            <text x="545" y="38" text-anchor="middle" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="11" font-weight="600">Loveland</text>
+            <text x="545" y="86" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="10">Mile 25</text>
+
+            <!-- Active Location Ring -->
+            <circle id="map-marker" cx="55" cy="55" r="13" fill="none" stroke="#facc15" stroke-width="2.5" class="transition-all duration-300" />
+          </svg>
+        </div>
+
+        <!-- Event Description Box -->
+        <div class="bg-slate-900/70 rounded-xl p-4 border border-slate-800">
+          <h4 id="timeline-title" class="font-bold text-white text-base">Rain Starts in the Canyon</h4>
+          <p id="timeline-desc" class="text-sm sm:text-base text-slate-300 mt-1">
+            Rain begins falling around 5 p.m. while thousands of holiday visitors are camped and driving along Highway 34.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-lg leading-relaxed text-slate-200 space-y-5">
+        <p class="drop-cap">
+          The rain started at 5 p.m. and was heavy by 6:30. Around 8, people began calling 911 about rocks on the highway. By 8:45, a patrolman near Estes Park reported flooding, and deputies began driving through campgrounds with loudspeakers, circling two or three times. Some people left right away. Others waited until the second or third pass. At least two never left their campsites, and they died.
+        </p>
+        <p>
+          Most people were never warned at all. In Drake, where the flood hit hardest, the only warnings were what people could see and hear: the heavy rain, the rising river, and a sudden change in the sound of the water. One couple in Waltonia knew the river so well that when its sound changed, they moved right away. They already had a plan in case the dam at Estes Park failed. Another couple was stopped by a patrolman who told them to leave their car and climb. They thought he was overreacting, so they stayed. They died, according to Eve Gruntfest, a University of Colorado researcher who studied the flood in 1977.
+        </p>
+        <p>
+          At 9:15, Purdy made his last radio call. Around 10:30, a wall of water nearly 20 feet tall tore down the canyon. The National Weather Service issued its first flash-flood bulletin at 11 p.m., about thirty minutes after the main wave had already hit.
+        </p>
+      </div>
+    </section>
+
+    <hr class="border-slate-800" />
+
+    <!-- ===================================================================
+         SECTION IV: THE LEDGE
+    ==================================================================== -->
+    <section id="part-4" class="fade-section space-y-6">
+      <div>
+        <p class="ui-font text-xs font-bold uppercase tracking-widest text-yellow-400">Part IV</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">The Ledge</h2>
+      </div>
+
+      <div class="text-lg leading-relaxed text-slate-200 space-y-5">
+        <p class="drop-cap">
+          Connie Granath Hays was 18. She and her friend Terry Belair were driving home from Estes Park when they entered the canyon in a heavy downpour. As the water rose, they left her car and climbed the rock wall beside the road. The first ledge was not high enough. From there, they watched her car float away in the current, so they climbed higher.
+        </p>
+        <p>
+          They held on until daybreak, when a helicopter finally lifted them out. Fifty years later, Granath Hays told Denver7 that the two of them realized "how very lucky we were." Their choice was the simplest one available: leave the car and go up.
+        </p>
+      </div>
+
+      <!-- Simple Water-Level Comparison Slider -->
+      <div class="rounded-2xl bg-slate-950 border border-slate-800 p-5 sm:p-6 shadow-lg space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="text-base sm:text-lg font-bold text-white">How High Was a 20-Foot Wall of Water?</h3>
+          <span id="water-label" class="ui-font px-3 py-1 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/40 text-sm font-bold">
+            1.5 ft (18 inches)
+          </span>
+        </div>
+
+        <div>
+          <label for="water-slider" class="block text-xs text-slate-400 mb-2">
+            Drag the slider to raise the river from 1.5 ft to 20 ft:
+          </label>
+          <input id="water-slider" type="range" min="1.5" max="20" step="0.5" value="1.5" class="w-full" />
+        </div>
+
+        <!-- Simple Cross-Section Box -->
+        <div class="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+          <svg viewBox="0 0 500 260" class="w-full h-auto block">
+            <!-- Height Guide Lines (Ground = y 240, 10px per foot) -->
+            <line x1="0" y1="240" x2="500" y2="240" stroke="#334155" stroke-width="1" />
+            <line x1="0" y1="180" x2="500" y2="180" stroke="#1e293b" stroke-dasharray="4 4" />
+            <line x1="0" y1="120" x2="500" y2="120" stroke="#1e293b" stroke-dasharray="4 4" />
+            <line x1="0" y1="40" x2="500" y2="40" stroke="#1e293b" stroke-dasharray="4 4" />
+
+            <text x="10" y="176" fill="#64748b" font-family="Inter, sans-serif" font-size="10">6 ft</text>
+            <text x="10" y="116" fill="#64748b" font-family="Inter, sans-serif" font-size="10">12 ft</text>
+            <text x="10" y="36" fill="#facc15" font-family="Inter, sans-serif" font-size="10">20 ft</text>
+
+            <!-- Canyon Rock Wall with First Ledge (10ft) & High Ledge (22ft) -->
+            <polygon points="340,240 340,140 395,140 395,20 500,20 500,240" fill="#1e293b" />
+            <text x="346" y="155" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9">1st Ledge (10 ft)</text>
+            <text x="402" y="34" fill="#facc15" font-family="Inter, sans-serif" font-size="9" font-weight="700">High Ledge (22 ft)</text>
+
+            <!-- Simple Car (~5 ft tall = 50px) -->
+            <g id="car-shape" class="transition-transform duration-200">
+              <rect x="85" y="210" width="110" height="22" rx="4" fill="#64748b" />
+              <rect x="105" y="192" width="68" height="20" rx="4" fill="#475569" />
+              <circle cx="110" cy="234" r="7" fill="#0f172a" stroke="#cbd5e1" stroke-width="2" />
+              <circle cx="170" cy="234" r="7" fill="#0f172a" stroke="#cbd5e1" stroke-width="2" />
+              <text x="140" y="184" text-anchor="middle" fill="#cbd5e1" font-family="Inter, sans-serif" font-size="10">Car (~5 ft)</text>
+            </g>
+
+            <!-- Simple Person (~6 ft tall = 60px) -->
+            <g transform="translate(250, 180)">
+              <circle cx="10" cy="7" r="5" fill="#f8fafc" />
+              <line x1="10" y1="12" x2="10" y2="38" stroke="#f8fafc" stroke-width="3" />
+              <line x1="10" y1="20" x2="2" y2="32" stroke="#f8fafc" stroke-width="2" />
+              <line x1="10" y1="20" x2="18" y2="32" stroke="#f8fafc" stroke-width="2" />
+              <line x1="10" y1="38" x2="5" y2="58" stroke="#f8fafc" stroke-width="2.5" />
+              <line x1="10" y1="38" x2="15" y2="58" stroke="#f8fafc" stroke-width="2.5" />
+              <text x="10" y="-6" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="10">Person (~6 ft)</text>
+            </g>
+
+            <!-- Rising Blue Water Rectangle -->
+            <rect id="water-box" x="0" y="225" width="500" height="15" fill="#0284c7" opacity="0.7" />
+            <line id="water-top-line" x1="0" y1="225" x2="500" y2="225" stroke="#38bdf8" stroke-width="2" />
+
+            <!-- Ground -->
+            <rect x="0" y="240" width="500" height="20" fill="#020617" />
+          </svg>
+        </div>
+
+        <p id="water-status-text" class="text-sm sm:text-base text-slate-300">
+          Normal river depth: about 18 inches deep beside Highway 34.
+        </p>
+      </div>
+    </section>
+
+    <hr class="border-slate-800" />
+
+    <!-- ===================================================================
+         SECTION V: THE MORNING AFTER
+    ==================================================================== -->
+    <section id="part-5" class="fade-section space-y-6">
+      <div>
+        <p class="ui-font text-xs font-bold uppercase tracking-widest text-yellow-400">Part V</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">The Morning After</h2>
+      </div>
+
+      <div class="text-lg leading-relaxed text-slate-200 space-y-5">
+        <p class="drop-cap">
+          When the light came, helicopters lifted more than 800 people off ledges and rooftops. In Loveland, refrigerated trucks were parked outside the hospital morgue. In the end, 144 people were dead, and the flood had destroyed 418 homes and 52 businesses. Estes Park Officer Michael Conley also died helping victims, along with Purdy. Five people were never found: Teresa Graham, 10, Evelyn Kindred, 67, George McCarty, 21, Vernon Oler, 51, and Rochelle Rogers, 2.
+        </p>
+        <p>
+          Gruntfest's research helped lead to the yellow warning signs now posted in canyons across Colorado: "In case of flash flood, climb to safety." Peek says the sign has lasted because "the message has to be actionable."
+        </p>
+        <p>
+          The sign does not ask anyone to read a rain gauge or judge the sky. It asks them to go up. Almost everything about that night was complicated. The one thing that was not was where to go.
+        </p>
+      </div>
+
+      <!-- Simple Yellow Highway Warning Sign & Memorial Card -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 items-stretch">
+        <!-- Yellow Warning Sign -->
+        <div class="flex items-center justify-center rounded-2xl bg-slate-950 border border-slate-800 p-6">
+          <div class="bg-yellow-400 text-slate-950 rounded-2xl p-2 shadow-lg w-full max-w-xs">
+            <div class="border-4 border-slate-950 rounded-xl px-5 py-6 text-center">
+              <p class="ui-font font-extrabold text-base tracking-wide uppercase">
+                IN CASE OF FLASH FLOOD
+              </p>
+              <div class="h-0.5 bg-slate-950/30 my-2.5"></div>
+              <p class="ui-font font-black text-2xl tracking-tight uppercase">
+                CLIMB TO SAFETY
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Memorial & Key Numbers Card -->
+        <div class="rounded-2xl bg-slate-950 border border-slate-800 p-6 flex flex-col justify-between space-y-4">
+          <div>
+            <h3 class="text-lg font-bold text-white">Remembering July 31, 1976</h3>
+            <div class="grid grid-cols-2 gap-3 my-4">
+              <div class="bg-slate-900 rounded-xl p-3 border border-slate-800">
+                <span class="ui-font block text-2xl font-extrabold text-yellow-400">144</span>
+                <span class="ui-font text-xs text-slate-400">Lives Lost</span>
+              </div>
+              <div class="bg-slate-900 rounded-xl p-3 border border-slate-800">
+                <span class="ui-font block text-2xl font-extrabold text-sky-400">800+</span>
+                <span class="ui-font text-xs text-slate-400">Rescued by Helicopter</span>
+              </div>
+            </div>
+            <p class="ui-font text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+              The Five Never Found
+            </p>
+            <ul class="text-sm text-slate-300 space-y-1">
+              <li>Teresa Graham, 10</li>
+              <li>Evelyn Kindred, 67</li>
+              <li>George McCarty, 21</li>
+              <li>Vernon Oler, 51</li>
+              <li>Rochelle Rogers, 2</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         FOOTER: ABOUT THIS STORY & PUBLISHED SOURCES
+    ==================================================================== -->
+    <footer class="pt-10 border-t border-slate-800 space-y-8">
+      <div class="rounded-2xl bg-slate-950 border border-slate-800 p-6 space-y-4">
+        <h3 class="text-lg font-bold text-white">About This Story</h3>
+        <p class="text-base text-slate-300 leading-relaxed">
+          I picked a flash flood because I kept thinking about how quickly water can change a place that looks completely safe. What stood out to me most was how simple the survival advice is, and how many things get in the way of following it. I used John Branch's "Snow Fall" as my mentor text. I did not interview anyone for this story, so every fact and quote comes from the published sources below.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <h3 class="text-base font-bold text-white">Published Sources</h3>
+        <ul class="ui-font list-disc list-inside space-y-2 text-xs sm:text-sm text-slate-400 leading-relaxed">
+          <li><strong class="text-slate-200">The Gazette</strong>, "40 years later: Remembering the Big Thompson Flood"</li>
+          <li><strong class="text-slate-200">USGS Fact Sheet 2006-3095</strong>, "1976 Big Thompson flood, Colorado: Thirty years later"</li>
+          <li><strong class="text-slate-200">USGS General Information Product 35</strong>, "1976 Big Thompson flood, Colorado"</li>
+          <li><strong class="text-slate-200">USGS</strong>, "Storm and flood of July 31-August 1, 1976"</li>
+          <li><strong class="text-slate-200">NOAA Technical Report ERL 388</strong>, "Meteorological Aspects of the Big Thompson Flash Flood"</li>
+          <li><strong class="text-slate-200">Eve Gruntfest</strong>, "What People Did During the Big Thompson Flood" (1977)</li>
+          <li><strong class="text-slate-200">Denver7</strong>, "Big Thompson Canyon Flood survivors mark 50 years"</li>
+          <li><strong class="text-slate-200">KUNC</strong>, "A look back at the Big Thompson Flood, 50 years later"</li>
+          <li><strong class="text-slate-200">CU Boulder Natural Hazards Center</strong>, "Why remembering the Big Thompson Flood of 1976 matters today"</li>
+          <li><strong class="text-slate-200">Colorado National Guard</strong>, "The Night the Sky Collapsed"</li>
+          <li><strong class="text-slate-200">Denver Gazette</strong>, "Remembering the Big Thompson Canyon flood"</li>
+          <li><strong class="text-slate-200">Urban Drainage and Flood Control District</strong>, July 31, 1976 summary</li>
+        </ul>
+      </div>
+    </footer>
+  </main>
+
+  <!-- =====================================================================
+       SIMPLE VANILLA JAVASCRIPT
+  ====================================================================== -->
+  <script>
+    // 1. Create simple CSS raindrops in the hero banner
+    const rainLayer = document.getElementById('rain-layer');
+    for (let i = 0; i < 45; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'raindrop';
+      drop.style.left = Math.random() * 100 + '%';
+      drop.style.animationDuration = (0.7 + Math.random() * 0.7) + 's';
+      drop.style.animationDelay = (Math.random() * 2) + 's';
+      rainLayer.appendChild(drop);
+    }
+
+    // 2. Top reading progress bar
+    const progressBar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
+      progressBar.style.width = percent + '%';
+    });
+
+    // 3. Fade in sections when scrolled into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-section').forEach((sec) => observer.observe(sec));
+
+    // 4. Rain Gauge Buttons (Section II)
+    const rainData = {
+      normal: {
+        width: '4%',
+        text: 'A typical summer shower drops around 0.2 inches of rain, leaving the river calm at about 18 inches deep.'
+      },
+      peak: {
+        width: '62.5%',
+        text: 'Up to 7.5 inches of rain fell in about an hour, overwhelming the steep granite slopes.'
+      },
+      total: {
+        width: '100%',
+        text: 'About 12 inches of rain fell in just a few hours. Steep canyon walls funneled all that water straight into the river like a bathtub.'
+      }
+    };
+
+    const rainButtons = document.querySelectorAll('.rain-btn');
+    const rainBar = document.getElementById('rain-bar');
+    const rainCaption = document.getElementById('rain-caption');
+
+    rainButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-rain');
+        rainBar.style.width = rainData[key].width;
+        rainCaption.textContent = rainData[key].text;
+
+        rainButtons.forEach((b) => {
+          b.classList.remove('bg-sky-500', 'text-slate-950');
+          b.classList.add('bg-slate-800', 'text-slate-300');
+        });
+        btn.classList.remove('bg-slate-800', 'text-slate-300');
+        btn.classList.add('bg-sky-500', 'text-slate-950');
+      });
+    });
+
+    // 5. Interactive Timeline & Canyon Map (Section III)
+    const timelineSteps = [
+      {
+        time: '5:00 PM',
+        title: 'Rain Starts in the Canyon',
+        desc: 'Rain begins falling around 5 p.m. while thousands of holiday visitors are camped and driving along Highway 34.',
+        x: 55, y: 55, dash: 430
+      },
+      {
+        time: '6:30 PM',
+        title: 'Heavy Downpour Stalls Over the Mountains',
+        desc: 'The rain becomes heavy by 6:30 p.m. as easterly winds pin the storm against the steep canyon walls.',
+        x: 150, y: 48, dash: 350
+      },
+      {
+        time: '8:00 PM',
+        title: '911 Calls About Rocks on Highway 34',
+        desc: 'Drivers begin calling 911 to report rocks and debris washing onto the canyon highway.',
+        x: 225, y: 49, dash: 280
+      },
+      {
+        time: '8:45 PM',
+        title: 'Campground Loudspeaker Warnings',
+        desc: 'A patrolman near Estes Park reports flooding, and deputies circle campgrounds with loudspeakers. In Waltonia, a couple hears the river sound change and climbs right away.',
+        x: 225, y: 49, dash: 220
+      },
+      {
+        time: '9:15 PM',
+        title: 'Sgt. Purdy Makes His Last Radio Call',
+        desc: 'Half a mile east of Drake, Sgt. Purdy radios that he is trapped and tells dispatch to clear cars from the lower canyon.',
+        x: 385, y: 64, dash: 140
+      },
+      {
+        time: '10:30 PM',
+        title: 'A 20-Foot Wall of Water Hits Drake',
+        desc: 'A wall of water nearly 20 feet tall tears down the canyon, wiping out homes, businesses, and vehicles.',
+        x: 385, y: 64, dash: 50
+      },
+      {
+        time: '11:00 PM',
+        title: 'First Flash-Flood Bulletin Issued',
+        desc: 'The National Weather Service issues its first flash-flood bulletin at 11 p.m., about thirty minutes after the main wave hit.',
+        x: 545, y: 60, dash: 0
+      }
+    ];
+
+    const tabsContainer = document.getElementById('timeline-tabs');
+    const mapTimeBadge = document.getElementById('map-time-badge');
+    const mapMarker = document.getElementById('map-marker');
+    const mapFloodLine = document.getElementById('map-flood-line');
+    const timelineTitle = document.getElementById('timeline-title');
+    const timelineDesc = document.getElementById('timeline-desc');
+
+    timelineSteps.forEach((step, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = step.time;
+      btn.className = 'time-tab px-3 py-1.5 rounded-lg text-xs font-semibold transition ' +
+        (index === 0 ? 'bg-yellow-400 text-slate-950' : 'bg-slate-800 text-slate-300 hover:bg-slate-700');
+
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.time-tab').forEach((t) => {
+          t.classList.remove('bg-yellow-400', 'text-slate-950');
+          t.classList.add('bg-slate-800', 'text-slate-300');
+        });
+        btn.classList.remove('bg-slate-800', 'text-slate-300');
+        btn.classList.add('bg-yellow-400', 'text-slate-950');
+
+        mapTimeBadge.textContent = step.time;
+        timelineTitle.textContent = step.title;
+        timelineDesc.textContent = step.desc;
+        mapMarker.setAttribute('cx', step.x);
+        mapMarker.setAttribute('cy', step.y);
+        mapFloodLine.style.strokeDashoffset = step.dash;
+      });
+
+      tabsContainer.appendChild(btn);
+    });
+
+    // 6. Water-Level Comparison Slider (Section IV)
+    const waterSlider = document.getElementById('water-slider');
+    const waterLabel = document.getElementById('water-label');
+    const waterBox = document.getElementById('water-box');
+    const waterTopLine = document.getElementById('water-top-line');
+    const carShape = document.getElementById('car-shape');
+    const waterStatusText = document.getElementById('water-status-text');
+
+    waterSlider.addEventListener('input', () => {
+      const ft = parseFloat(waterSlider.value);
+      const heightPx = ft * 10;
+      const topY = 240 - heightPx;
+
+      waterBox.setAttribute('y', topY);
+      waterBox.setAttribute('height', heightPx);
+      waterTopLine.setAttribute('y1', topY);
+      waterTopLine.setAttribute('y2', topY);
+
+      waterLabel.textContent = ft === 1.5 ? '1.5 ft (18 inches)' : ft.toFixed(1) + ' ft';
+
+      if (ft >= 2.5) {
+        carShape.style.transform = 'translateY(-18px) rotate(-8deg)';
+      } else {
+        carShape.style.transform = 'translateY(0px) rotate(0deg)';
+      }
+
+      if (ft < 2) {
+        waterStatusText.textContent = 'Normal river depth: about 18 inches deep beside Highway 34.';
+      } else if (ft < 6) {
+        waterStatusText.textContent = 'At ' + ft.toFixed(1) + ' feet, fast water lifts cars off the road and sweeps them downstream.';
+      } else if (ft < 10) {
+        waterStatusText.textContent = 'At ' + ft.toFixed(1) + ' feet, both cars and standing people are completely underwater.';
+      } else if (ft < 18) {
+        waterStatusText.textContent = 'At ' + ft.toFixed(1) + ' feet, the first rock ledge (10 ft) is underwater. Survivors had to climb higher.';
+      } else {
+        waterStatusText.textContent = 'At ' + ft.toFixed(1) + ' feet, a wall of water nearly 20 feet tall tore down the canyon. Only high ledges were safe.';
+      }
+    });
+  </script>
+</body>
+</html>
